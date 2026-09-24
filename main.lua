@@ -409,6 +409,11 @@ function love.update(dt)
                     game.grid[coords[2]][coords[1]] = EMPTY
                 end
 
+                -- Clear active lightning visuals so it disappears after animation
+                game.active_segments = {}
+                game.lit_orbs = {}
+                game.destroyed_orbs = {}
+
                 if game.winner then
                     game.state = STATE_GAME_OVER
                 else
@@ -455,6 +460,13 @@ function love.mousepressed(x, y, button, isTouch)
         end
     end
 end
+
+function love.keypressed(key)
+    if key == "r" then
+        reset_game()
+    end
+end
+
 
 function love.draw()
     love.graphics.clear(0.08, 0.09, 0.12)
